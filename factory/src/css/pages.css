@@ -1,0 +1,16 @@
+.login:hover{
+	opacity: 0.8;
+	border:none;
+
+}
+
+.title{
+	font-family: Vogue;
+	font-size: 4vw;
+	text-align: center;
+}
+
+
+.inputbox{
+	font-size:2vw;
+}

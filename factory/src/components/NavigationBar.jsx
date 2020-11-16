@@ -8,15 +8,20 @@ class NavigationBar extends Component {
             <div>
                 <Navbar fixed="top" bg="white" expand="lg">
                     <Navbar.Brand href="/">Factory</Navbar.Brand>
-                    <Nav className="mr-auto">
-                        <Nav.Link href="/"> Order </Nav.Link>
-                        <Nav.Link href="/ingredients"> Ingredients </Nav.Link>
-                        <Nav.Link href="/recipe"> Recipe </Nav.Link>
-                        <Nav.Link href="/chocolate"> Chocolate </Nav.Link>
-                    </Nav>
-                    <Nav className="ml-auto">
-                        <Nav.Link href="/login">Logout</Nav.Link>
-                    </Nav>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+                    <Navbar.Collapse id="basic-navbar-nav">
+
+                        <Nav className="mr-auto">
+                            <Nav.Link href="/"> Order </Nav.Link>
+                            <Nav.Link href="/ingredients"> Ingredients </Nav.Link>
+                            <Nav.Link href="/recipe"> Recipe </Nav.Link>
+                            <Nav.Link href="/chocolate"> Chocolate </Nav.Link>
+                        </Nav>
+                        <Nav className="ml-auto">
+                            <Nav.Link href="/login">Logout</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
 
                 </Navbar>
 

@@ -14,3 +14,24 @@
 .inputbox{
 	font-size:2vw;
 }
+
+
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.linkto{
+	text-decoration: none;
+	color:white;
+}
+
+.linkto:hover{
+	opacity: 0.7;
+	color:brown;
+	text-decoration: none;
+}

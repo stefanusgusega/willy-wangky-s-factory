@@ -13,17 +13,26 @@ export default function Confirmation(props) {
           Confirmation Order
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {props.total.map((x)=> (
-          <h4>You have to pay Rp.{x.total}.- </h4> ))}
-        <p>
-          
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button> Proceed </Button>
-        <Button onClick={props.onHide} variant="danger">Cancel</Button>
-      </Modal.Footer>
-    </Modal>
+      
+        {props.buy.map((x)=> (
+          <div>
+          <div style={{padding:"2%"}}>
+
+          {x.status && <h5>If you buy the ingredients,</h5>}
+          {!x.status && <h5> You do not have enough money! </h5>}
+          {x.status&& <h5>You will have Rp.{x.sisa} left </h5> }
+          {!x.status && <h5> You need to have Rp.{x.sisa} more </h5>}
+
+          </div>
+          <div>
+          <Modal.Footer>
+            {x.status &&<Button> Proceed </Button>}
+            <Button onClick={props.onHide} variant="danger">Cancel</Button>
+          </Modal.Footer>
+          </div>
+      </div>
+          ))
+        }
+      </Modal>
   );
 }

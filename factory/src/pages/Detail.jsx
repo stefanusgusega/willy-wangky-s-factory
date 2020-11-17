@@ -11,7 +11,7 @@ class Detail extends Component {
 	      show: false,
 	      items: [],
 	      total: 1,
-	      price: []
+	      buy: []
 	    };
 	 }
 
@@ -35,9 +35,7 @@ class Detail extends Component {
 	            items: result
 	          });
 	        },
-	        // Note: it's important to handle errors here
-	        // instead of a catch() block so that we don't swallow
-	        // exceptions from actual bugs in components.
+	        
 	        (error) => {
 	          this.setState({
 	            error
@@ -50,24 +48,25 @@ class Detail extends Component {
 
 	buyBahan = () =>{
 		var id = this.props.match.params.id;
-		fetch("http://localhost:3000/bahan/" +id +"/" + this.state.total)
+		// nanti diisi saldonya yang bener
+		var saldo = 10000;
+
+		fetch("http://localhost:3000/bahan/" +id +"/" + this.state.total +"/"+saldo)
 	      .then(res => res.json())
 	      .then(
 	        (result) => {
 	          this.setState({
-	            price : result
+	            buy : [result]
 	          });
 	        },
-	        // Note: it's important to handle errors here
-	        // instead of a catch() block so that we don't swallow
-	        // exceptions from actual bugs in components.
+	        
 	        (error) => {
 	          this.setState({
 	            error
 	          });
 	        }
 	      );
-	    console.log(this.state.price);
+	    console.log(this.state.buy);
 	    this.handleShow();
 	  
 	    
@@ -117,7 +116,7 @@ class Detail extends Component {
 				  	<Confirmation
 				        show={this.state.show}
 				        onHide={this.handleShow}
-				        total ={this.state.price}
+				        buy ={this.state.buy}
 				      />
 			  	</div>
 			  	))}

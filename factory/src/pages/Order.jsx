@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import NavigationBar from './NavigationBar';
+import NavigationBar from '../components/NavigationBar';
 
-class Recipe extends Component {
+class Order extends Component {
     state = {  }
     render() { 
         return ( 
@@ -14,4 +14,4 @@ class Recipe extends Component {
     }
 }
  
-export default Recipe;
+export default Order;

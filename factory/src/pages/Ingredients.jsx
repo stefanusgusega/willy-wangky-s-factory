@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavigationBar from './NavigationBar';
+import NavigationBar from '../components/NavigationBar';
 import '../css/pages.css';
 import { Link } from 'react-router-dom'
 import {Table} from "react-bootstrap";

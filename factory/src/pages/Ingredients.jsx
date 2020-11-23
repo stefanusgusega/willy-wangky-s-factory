@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import '../css/pages.css';
+import {soapMessage} from '../components/Message.js';
 import { Link } from 'react-router-dom'
 import {Table} from "react-bootstrap";
+import axios from 'axios';
 
 class Ingredients extends Component{
 	constructor(props) {
@@ -10,11 +12,15 @@ class Ingredients extends Component{
 	    this.state = {
 	      error: null,
 	      isLoaded: false,
-	      items: []
+	      items: [],
+	      saldo :0
 	    };
 	  }
-
-	  componentDidMount() {
+	
+	
+	
+	componentDidMount() {
+	    var XMLParser= require('react-xml-parser');
 	    fetch("http://localhost:3000/bahan")
 	      .then(res => res.json())
 	      .then(
@@ -33,20 +39,41 @@ class Ingredients extends Component{
 	            error
 	          });
 	        }
-	      )
+		  );
+		  let message = soapMessage('getSaldo',[]);
+			console.log(message);
 
-	  }
+		  axios.post("http://localhost:8080/ws-factory/ws/server?wsdl", message,{
+			  headers : 
+			  { 'Content-type':'text/xml'}
+		  }).then(res =>{
+			console.log(res);
+			var xml = new XMLParser().parseFromString(res.data);
+			var data = xml.getElementsByTagName('return');
+			console.log(data);
+			this.setState({
+				saldo: data[0].value
+				});
+			console.log(JSON.stringify(data[0].value));
+			console.log(data[0].value);
+		  }).catch(err=>{ console.log(err)});
+  
+}
+		
 
 	render(){
 		return ( 
         <div>
 
             <NavigationBar/>
-
+	
             <br/><br/><br/><br/>
             <div className="title">
             INGREDIENTS LIST
             </div>
+	   <div style={{textAlign:"center"}}>
+		Saldo : {this.state.saldo}
+		</div>
             <div style={{padding:"5% 10%"}}>
 	            <Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
 				  <thead>

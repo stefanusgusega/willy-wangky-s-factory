@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import {Table} from "react-bootstrap";
 import axios from 'axios';
 
-class Ingredients extends Component{
+class Shop extends Component{
 	constructor(props) {
 	    super(props);
 	    this.state = {
@@ -20,7 +20,6 @@ class Ingredients extends Component{
 	
 	
 	componentDidMount() {
-	    var XMLParser= require('react-xml-parser');
 	    fetch("http://localhost:3000/bahan")
 	      .then(res => res.json())
 	      .then(
@@ -40,24 +39,7 @@ class Ingredients extends Component{
 	          });
 	        }
 		  );
-		  let message = soapMessage('getBahan',[]);
-			console.log(message);
 
-		  axios.post("http://localhost:8080/ws-factory/ws/server?wsdl", message,{
-			  headers : 
-			  { 'Content-type':'text/xml'}
-		  }).then(res =>{
-			var xml = new XMLParser().parseFromString(res.data);
-			var data = xml.getElementsByTagName('return');
-			var saldo = [];
-			data[0].children.forEach(function(obj) {
-				saldo.push(obj.children);
-			})
-			this.setState({saldo});
-			
-			
-
-		  }).catch(err=>{ console.log(err)});
   
 }
 		
@@ -70,7 +52,7 @@ class Ingredients extends Component{
 	
             <br/><br/><br/><br/>
             <div className="title">
-            INGREDIENTS LIST
+            SHOP
             </div>
 	   <div style={{textAlign:"center"}}>
 		
@@ -81,21 +63,20 @@ class Ingredients extends Component{
 				    <tr>
 				      <th>Id</th>
 				      <th>Name</th>
-				      <th>Jumlah</th>
-				      <th>Tanggal Kadaluwarsa </th>
+				      <th>Price</th>
 				    </tr>
 				  </thead>
 				  <tbody>	
-				  {this.state.saldo.map((bahan)=> (
+				  {this.state.items.map((bahan)=> (
 				  	<tr>
-				  	<td>{ bahan[0].value }</td>
+				  	<td>{ bahan.id_bahan }</td>
 
 				  	<td>
-				  	
-				  	{bahan[1].value} 
+				  	<Link to={{pathname:"/shop/" + bahan.id_bahan, id:bahan.id_bahan}} className="linkto">
+				  	{bahan[1].nama_bahan} 
+				  	</Link>
 				  	</td>
-				  	<td> {bahan[2].value}</td>
-					<td> {bahan[3].value}</td>
+				  	<td> {bahan.harga_bahan}</td>
 				  	</tr>
 				  	
 				  	))}
@@ -111,4 +92,4 @@ class Ingredients extends Component{
     
 }
  
-export default Ingredients;
+export default Shop;

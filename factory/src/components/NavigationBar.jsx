@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import {Navbar, Nav} from 'react-bootstrap';
-
+import Cookies from 'js-cookie';
 class NavigationBar extends Component {
     state = {  }
+
+    logout = () => {
+	Cookies.remove('user');
+
+
+	}
     render() { 
         return ( 
             <div>
@@ -17,9 +23,10 @@ class NavigationBar extends Component {
                             <Nav.Link href="/ingredients"> Ingredients </Nav.Link>
                             <Nav.Link href="/recipe"> Recipe </Nav.Link>
                             <Nav.Link href="/chocolate"> Chocolate </Nav.Link>
+			    <Nav.Link href="/shop"> Shop </Nav.Link>
                         </Nav>
                         <Nav className="ml-auto">
-                            <Nav.Link href="/login">Logout</Nav.Link>
+                            <Nav.Link href="/login" onClick={this.logout} >Logout</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
 

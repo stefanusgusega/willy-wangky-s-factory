@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form,Button} from 'react-bootstrap';
 import '../css/pages.css';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import {Redirect} from 'react-router-dom';
 import {soapMessage} from '../components/Message.js';
 
@@ -13,9 +14,10 @@ class Login extends Component {
 	      isLoaded: false,
 	      email: "",
 	      password:"",
-	      valid:""
+	      valid:"",
 	    };
 	  }
+    
 
     changePage = () =>{
 	if (this.state.valid == "true"){
@@ -42,18 +44,30 @@ class Login extends Component {
 			this.setState({
 				valid: data[0].value
 				});
+			Cookies.set('user',data[0].value, {expires : 1 });
+			console.log(data[0].value);
 		  }).catch(err=>{ console.log(err)});
 	event.preventDefault();
-	this.changePage();
+	window.location.reload();
 	
+
 	
+	}
+	
+
+	componentDidMount(){	
+		if(Cookies.get('user') == "true"){
+			this.props.history.push("/");
+		} else if (Cookies.get('user') == 'false') {
+		alert("Email or password is not valid");
+		}
 }
 
     render() { 
         return ( 
             <div className="center-screen">
             	<div className="title">
-            		Willy Wangko Factory {this.state.valid}
+            		Willy Wangko Factory
             	</div>
             	<Form style={{padding:"5%",textAlign:"center"}} onSubmit= {this.handleSubmit}>
 					  <Form.Group controlId="formBasicEmail" style={{paddingBottom:"5%"}}>

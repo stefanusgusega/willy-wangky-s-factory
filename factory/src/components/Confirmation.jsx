@@ -10,29 +10,29 @@ export default function Confirmation(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Confirmation Order
+          {props.canBuy=="true" && <div> Confirmation Order </div> }
         </Modal.Title>
       </Modal.Header>
       
-        {props.buy.map((x)=> (
+       
           <div>
           <div style={{padding:"2%"}}>
 
-          {x.status && <h5>If you buy the ingredients,</h5>}
-          {!x.status && <h5> You do not have enough money! </h5>}
-          {x.status&& <h5>You will have Rp.{x.sisa} left </h5> }
-          {!x.status && <h5> You need to have Rp.{x.sisa} more </h5>}
-
+          {props.status=="true" && props.canbuy=="true" && <h5>If you buy the ingredients,</h5>}
+          {props.status=="false" && props.canbuy=="true" && <h5> You do not have enough money! </h5>}
+          {props.status=="true" && props.canbuy=="true" && <h5>You will have Rp.{props.sisa} left </h5> }
+          {props.status=="false" && props.canbuy=="true" && <h5> You need to have Rp.{props.sisa} more </h5>}
+	  {props.canbuy=="false" && <h5> You cannot buy nothing! </h5>}
           </div>
-          <div>
+          <div> 
           <Modal.Footer>
-            {x.status &&<Button> Proceed </Button>}
+            {props.status=="true" && props.canbuy=="true" && <Button onClick={props.proceed}>  Proceed </Button>}
             <Button onClick={props.onHide} variant="danger">Cancel</Button>
           </Modal.Footer>
           </div>
-      </div>
-          ))
-        }
+      </div> 
+
+          
       </Modal>
   );
 }

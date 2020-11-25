@@ -16,3 +16,17 @@ export const soapMessage = (func, params) => {
 		  </soap:Envelope>`;
     return message;
 }
+export const objectMessage = (func,param,obj) => {
+      var message = `<?xml version='1.0' encoding='UTF-8'?>
+		  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+			  <soap:Body>
+				  
+				  <ns2:`+func+` xmlns:ns2="http://factory/"> 
+					<`+ param +`>` + obj + `</` +param+			
+				  `></ns2:`+func+`>
+				  
+			  </soap:Body>
+		  </soap:Envelope>`;
+	return message;
+
+}

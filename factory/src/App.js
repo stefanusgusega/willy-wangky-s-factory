@@ -7,7 +7,6 @@ import Login from './pages/Login';
 import Chocolate from './pages/Chocolate';
 import Recipe from './pages/Recipe';
 import Ingredients from './pages/Ingredients';
-import Detail from './pages/Detail';
 import Shop from './pages/Shop';
 import 'bootstrap/dist/css/bootstrap.css';
 function App() {
@@ -20,8 +19,7 @@ function App() {
         <Route path="/chocolate" component={Chocolate}/>
         <Route path="/shop" component={Shop}/>
         <Route exact path="/ingredients" component={Ingredients}/>
-        <Route exact path="/shop/:id" render={(props) => <Detail {...props} />}/>      
-        <Route path="/Recipe" component={Recipe}/>
+        <Route path="/recipe" component={Recipe}/>
       </Switch>
     </Router>
   );

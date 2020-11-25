@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import '../css/pages.css';
 import {soapMessage} from '../components/Message.js';
-import { Link } from 'react-router-dom'
 import {Table} from "react-bootstrap";
 import axios from 'axios';
 
@@ -13,7 +12,7 @@ class Ingredients extends Component{
 	      error: null,
 	      isLoaded: false,
 	      items: [],
-	      saldo :[]
+	      bahan :[]
 	    };
 	  }
 	
@@ -40,8 +39,8 @@ class Ingredients extends Component{
 	          });
 	        }
 		  );
-		  let message = soapMessage('getBahan',[]);
-			console.log(message);
+		  let message = soapMessage("getBahan",[]);
+			
 
 		  axios.post("http://localhost:8080/ws-factory/ws/server?wsdl", message,{
 			  headers : 
@@ -49,11 +48,11 @@ class Ingredients extends Component{
 		  }).then(res =>{
 			var xml = new XMLParser().parseFromString(res.data);
 			var data = xml.getElementsByTagName('return');
-			var saldo = [];
+			var bahan = [];
 			data[0].children.forEach(function(obj) {
-				saldo.push(obj.children);
+				bahan.push(obj.children);
 			})
-			this.setState({saldo});
+			this.setState({bahan});
 			
 			
 
@@ -86,8 +85,8 @@ class Ingredients extends Component{
 				    </tr>
 				  </thead>
 				  <tbody>	
-				  {this.state.saldo.map((bahan)=> (
-				  	<tr>
+				  {this.state.bahan.map((bahan,i)=> (
+				  	<tr key={i}>
 				  	<td>{ bahan[0].value }</td>
 
 				  	<td>

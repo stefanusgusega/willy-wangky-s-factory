@@ -29,7 +29,7 @@ class Login extends Component {
 	}	
 
     handleSubmit = (event) =>{
-	
+	event.preventDefault();
 	var XMLParser= require('react-xml-parser');
 	var valid;
 	let message = soapMessage('login',[this.state.email,this.state.password]);
@@ -47,7 +47,7 @@ class Login extends Component {
 			Cookies.set('user',data[0].value, {expires : 1 });
 			console.log(data[0].value);
 		  }).catch(err=>{ console.log(err)});
-	event.preventDefault();
+	
 	window.location.reload();
 	
 

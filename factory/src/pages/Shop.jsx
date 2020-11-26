@@ -57,9 +57,11 @@ class Shop extends Component{
 		  }).then(res =>{
 			var xml = new XMLParser().parseFromString(res.data);
 			var data = xml.getElementsByTagName('return');
+			console.log(res);
+			console.log(xml);
 		  }).catch(err=>{ console.log(err)});
 		this.handleShow();
-		window.location.reload();
+		  window.location.reload();
 		alert("Ingredients have been bought!");
 	}
 
@@ -182,7 +184,7 @@ class Shop extends Component{
 					<td style={{width:"100px"}}>
 		
 			<input id={'input-' + bahan.id_bahan} 
-                   onChange={this.handleChange.bind(this, bahan.id_bahan - 1)} type={"number"} min={0} defaultValue={0} style={{width:"100%",margin:"0"}} /> </td>
+                   onChange={this.handleChange.bind(this, i)} type={"number"} min={0} defaultValue={0} style={{width:"100%",margin:"0"}} /> </td>
 				  	</tr>
 				  	
 				  	))}

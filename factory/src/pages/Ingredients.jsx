@@ -11,7 +11,6 @@ class Ingredients extends Component{
 	    this.state = {
 	      error: null,
 	      isLoaded: false,
-	      items: [],
 	      bahan :[]
 	    };
 	  }
@@ -20,25 +19,6 @@ class Ingredients extends Component{
 	
 	componentDidMount() {
 	    var XMLParser= require('react-xml-parser');
-	    fetch("http://localhost:3000/bahan")
-	      .then(res => res.json())
-	      .then(
-	        (result) => {
-	          this.setState({
-	            isLoaded: true,
-	            items: result
-	          });
-	        },
-	        // Note: it's important to handle errors here
-	        // instead of a catch() block so that we don't swallow
-	        // exceptions from actual bugs in components.
-	        (error) => {
-	          this.setState({
-	            isLoaded: true,
-	            error
-	          });
-	        }
-		  );
 		  let message = soapMessage("getBahan",[]);
 			
 

@@ -36,11 +36,12 @@ class Shop extends Component{
 		  }).catch(err=>{ console.log(err)});
 
 		var xmlbahan = "";	
-		var arrayId = Object.keys(this.state.values).map((key) => Number(key) + 1);
+		var arrayId =(this.state.items).map((bahan)=>bahan.id_bahan);
 		var arrayJumlah = Object.keys(this.state.values).map((key) => this.state.values[key]);
 		var arrayNama = (this.state.items).map((bahan) => bahan.nama_bahan);
 		var arrayTanggal = new Array(this.state.items.length).fill('20-12-2020');
 		var i;
+		
 		for (i=0;i<arrayId.length;i++){
 			if (arrayJumlah[i] != 0 ){
 				var bahan= {idBahan:arrayId[i],namaBahan:arrayNama[i],jumlah:arrayJumlah[i],tanggalExp:arrayTanggal[i]};
@@ -50,6 +51,7 @@ class Shop extends Component{
 				
 			}
 		}
+		console.log(xmlbahan);
 		var addBahanMessage = objectMessage("addBahan","bahan",xmlbahan);
 		axios.post("http://localhost:8080/ws-factory/ws/server?wsdl", addBahanMessage,{
 			  headers : 

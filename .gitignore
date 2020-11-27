@@ -24,3 +24,6 @@ yarn-error.log*
 
 
 yarn.lock
+factory/yarn.lock
+package-lock.json
+factory/package-lock.json

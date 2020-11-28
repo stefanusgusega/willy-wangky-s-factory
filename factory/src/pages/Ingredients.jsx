@@ -54,9 +54,6 @@ class Ingredients extends Component{
             <div className="title">
             INGREDIENTS LIST
             </div>
-	   <div style={{textAlign:"center"}}>
-		
-		</div>
             <div style={{padding:"5% 10%"}}>
 	            <Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
 				  <thead>

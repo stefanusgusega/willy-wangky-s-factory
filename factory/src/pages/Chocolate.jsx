@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import axios from 'axios';
 import {soapMessage} from '../components/Message.js';
+import {Table} from 'react-bootstrap';
 const XMLParser = require('react-xml-parser');
 
 class Chocolate extends Component {
@@ -25,6 +26,7 @@ class Chocolate extends Component {
             var xml = new XMLParser().parseFromString(res.data);
             var data = xml.getElementsByTagName('return');
             var coklat = [];
+            // console.log(data);
             data[0].children.forEach(function (obj) {
                 coklat.push(obj.children)
             })
@@ -39,8 +41,35 @@ class Chocolate extends Component {
                 <br/><br/><br/><br/>
                 <div className="title">
                     CHOCOLATES AVAILABLE    
-                </div>               
                 </div>
+                <div style={{padding: "5% 10%"}}>
+                    <Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
+                        <thead>
+                            <tr>
+                                <th style={{textAlign: "center",fontWeight: "bold"}}>No</th>
+                                <th>Nama Cokelat</th>
+                                <th>Jumlah Cokelat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.chocos.map((chocos,i) => (
+                                <tr key={i}>
+                                    <td style={{textAlign: "center"}}>
+                                        {chocos[0].value}
+                                    </td>
+                                    <td>
+                                        {chocos[1].value}
+                                    </td>
+                                    <td>
+                                        {chocos[2].value}
+                                    </td>
+
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+            </div>
           );
     }
 }

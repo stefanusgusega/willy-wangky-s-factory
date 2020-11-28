@@ -29,6 +29,7 @@ class Recipe extends Component {
 			  headers : 
 			  { 'Content-type':'text/xml'}
 		  }).then(res =>{
+			console.log(res);
 			var xml = new XMLParser().parseFromString(res.data);
 			var data = xml.getElementsByTagName('return');
 			var resep = [];

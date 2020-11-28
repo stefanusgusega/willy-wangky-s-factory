@@ -22,25 +22,7 @@ class Recipe extends Component {
 			this.props.history.push("/login");
 		}
 	    var XMLParser= require('react-xml-parser');
-	    fetch("http://localhost:3000/result")
-	      .then(res => res.json())
-	      .then(
-	        (result) => {
-	          this.setState({
-	            isLoaded: true,
-	            items: result
-	          });
-	        },
-	        // Note: it's important to handle errors here
-	        // instead of a catch() block so that we don't swallow
-	        // exceptions from actual bugs in components.
-	        (error) => {
-	          this.setState({
-	            isLoaded: true,
-	            error
-	          });
-	        }
-		  );
+	    
 		  let message = soapMessage("getResep",[]);
 			
 		  axios.post("http://localhost:8080/ws-factory/ws/server?wsdl", message,{
@@ -54,6 +36,8 @@ class Recipe extends Component {
 				resep.push(obj.children);
 			})
 			console.log(resep);
+			console.log(resep.slice(1));
+
 			this.setState({resep});
 		  }).catch(err=>{ console.log(err)});
     }
@@ -68,61 +52,42 @@ class Recipe extends Component {
 		
 		</div>
             <div style={{padding:"5% 10%"}}>
-			<CardDeck>
-				{/* CONTOH */}
-				<Card key={999}  style={{ minWidth: '18rem', maxWidth: '18rem',marginBlockEnd:'2rem'}}>
-					<Card.Body>
-					<Card.Title>...</Card.Title>
-						<Card.Text>
-							<Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
-								<thead>
-									<tr>
-									<th>Bahan</th>
-									<th>Jumlah</th>
-									</tr>
-								</thead>
-								<tbody>	
-								
-									<tr key={99}>
-										<td>...</td>
-										<td>...</td>
-									</tr>											
-								
-								</tbody>
-							</Table>
-						</Card.Text>
-					</Card.Body>
-				</Card>
+			
 				
                     {this.state.resep.map((resep,i)=> (
-                        <Card key={i} style={{ minWidth: '18 rem'}}>
+			<div key={i}>
+			<CardDeck>
+                        <Card style={{ minWidth: '18 rem'}}>
                             <Card.Body>
-                            <Card.Title>{resep[0].value}</Card.Title>
+                             <Card.Title>ID Cokelat : {resep[0].value}</Card.Title>
                                 <Card.Text>
-									<Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
-										<thead>
-											<tr>
-											<th>Bahan</th>
-											<th>Jumlah</th>
-											</tr>
-										</thead>
-										<tbody>	
-
-										{/* LIST OF BAHAN DAN JUMLAH*/}
-										{resep[1].map((bahan,j)=> (
-											<tr key={j}>
-												<td>{ bahan[0].value }</td>
-												<td>{bahan[1].value}</td>
-											</tr>											
-										))}
-										</tbody>
-									</Table>
+					
+					<Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
+							<thead>
+							<tr>
+							<th> ID Bahan </th> 
+							<th>Bahan</th>
+							<th>Jumlah</th>
+							</tr>
+							</thead>
+							<tbody>	
+							{resep.slice(1).map((bahan,j) => (
+							<tr key={j}>
+								<td> {bahan.children[0].value}</td>
+								<td> {bahan.children[1].value}</td>
+								<td> {bahan.children[2].value}</td>
+							
+							</tr> ))}
+							</tbody>
+					</Table>	
                                 </Card.Text>
+				
+					
                             </Card.Body>
-                        </Card>
+                        </Card></CardDeck><br/><br/></div>
                     ))}
                 
-			</CardDeck>
+			
 			</div>
             		
          </div>

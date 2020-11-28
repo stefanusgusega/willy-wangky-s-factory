@@ -179,15 +179,9 @@ class Shop extends Component{
 				  {this.state.items.map((bahan,i)=> (
 				  	<tr key={i}>
 				  	<td>{ bahan.id_bahan }</td>
-
-				  	<td>
-				  	
-				  	{bahan.nama_bahan} 
-				  	
-				  	</td>
+				  	<td>{bahan.nama_bahan} </td>
 				  	<td> {bahan.harga_bahan}</td>
 					<td style={{width:"100px"}}>
-		
 			<input id={'input-' + bahan.id_bahan} 
                    onChange={this.handleChange.bind(this, i)} type={"number"} min={0} defaultValue={0} style={{width:"100%",margin:"0"}} /> </td>
 				  	</tr>

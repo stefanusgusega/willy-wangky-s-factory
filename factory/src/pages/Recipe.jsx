@@ -4,6 +4,7 @@ import '../css/pages.css';
 import {soapMessage} from '../components/Message.js';
 import {Table,Card,CardDeck, Col} from "react-bootstrap";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class Recipe extends Component {
 	constructor(props) {
@@ -17,6 +18,9 @@ class Recipe extends Component {
 	  }
 		
 	componentDidMount() {
+		if(Cookies.get('user') != "true"){
+			this.props.history.push("/login");
+		}
 	    var XMLParser= require('react-xml-parser');
 	    fetch("http://localhost:3000/result")
 	      .then(res => res.json())

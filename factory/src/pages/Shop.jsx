@@ -4,6 +4,7 @@ import '../css/pages.css';
 import {soapMessage,objectMessage} from '../components/Message.js';
 import {Table,Navbar,Nav,Button} from "react-bootstrap";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import {toXML} from 'jstoxml';
 import Confirmation from '../components/Confirmation';
 const XMLParser= require('react-xml-parser');
@@ -108,7 +109,9 @@ class Shop extends Component{
 	}
 	
 	componentDidMount() {
-	 
+	 if(Cookies.get('user') != "true"){
+		this.props.history.push("/login");
+	}
 	    fetch("http://localhost:4000/bahan")
 	      .then(res => res.json())
 	      .then(

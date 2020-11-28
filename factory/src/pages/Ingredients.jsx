@@ -4,6 +4,7 @@ import '../css/pages.css';
 import {soapMessage} from '../components/Message.js';
 import {Table} from "react-bootstrap";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class Ingredients extends Component{
 	constructor(props) {
@@ -18,6 +19,9 @@ class Ingredients extends Component{
 	
 	
 	componentDidMount() {
+	if(Cookies.get('user') != "true"){
+		this.props.history.push("/login");
+	}
 	    var XMLParser= require('react-xml-parser');
 		  let message = soapMessage("getBahan",[]);
 			
@@ -26,8 +30,11 @@ class Ingredients extends Component{
 			  headers : 
 			  { 'Content-type':'text/xml'}
 		  }).then(res =>{
+			console.log(res.data);
 			var xml = new XMLParser().parseFromString(res.data);
+			console.log(xml);
 			var data = xml.getElementsByTagName('return');
+			console.log(data);
 			var bahan = [];
 			data[0].children.forEach(function(obj) {
 				bahan.push(obj.children);
@@ -51,9 +58,6 @@ class Ingredients extends Component{
             <div className="title">
             INGREDIENTS LIST
             </div>
-	   <div style={{textAlign:"center"}}>
-		
-		</div>
             <div style={{padding:"5% 10%"}}>
 	            <Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
 				  <thead>

@@ -3,6 +3,7 @@ import NavigationBar from '../components/NavigationBar';
 import axios from 'axios';
 import {soapMessage} from '../components/Message.js';
 import {Table} from 'react-bootstrap';
+import Cookies from 'js-cookie';
 const XMLParser = require('react-xml-parser');
 
 class Chocolate extends Component {
@@ -16,6 +17,9 @@ class Chocolate extends Component {
     }
     
     componentDidMount() {
+	if(Cookies.get('user') != "true"){
+		this.props.history.push("/login");
+	}
         var msg = soapMessage("getChocos",[]);
         console.log(msg);
         axios.post("http://localhost:8080/ws-factory/ws/server?wsdl",msg,{

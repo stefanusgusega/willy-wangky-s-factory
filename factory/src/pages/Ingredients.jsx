@@ -4,6 +4,7 @@ import '../css/pages.css';
 import {soapMessage} from '../components/Message.js';
 import {Table} from "react-bootstrap";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class Ingredients extends Component{
 	constructor(props) {
@@ -18,6 +19,9 @@ class Ingredients extends Component{
 	
 	
 	componentDidMount() {
+	if(Cookies.get('user') != "true"){
+		this.props.history.push("/login");
+	}
 	    var XMLParser= require('react-xml-parser');
 		  let message = soapMessage("getBahan",[]);
 			

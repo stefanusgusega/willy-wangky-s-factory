@@ -3,7 +3,6 @@ import {Form,Button} from 'react-bootstrap';
 import '../css/pages.css';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {Redirect} from 'react-router-dom';
 import {soapMessage} from '../components/Message.js';
 
 class Login extends Component {
@@ -14,24 +13,13 @@ class Login extends Component {
 	      isLoaded: false,
 	      email: "",
 	      password:"",
-	      valid:"",
 	    };
 	  }
     
 
-    changePage = () =>{
-	if (this.state.valid == "true"){
-		console.log("ayok");
-	}
-	console.log("yah");
-
-
-	}	
-
     handleSubmit = (event) =>{
 	event.preventDefault();
 	var XMLParser= require('react-xml-parser');
-	var valid;
 	let message = soapMessage('login',[this.state.email,this.state.password]);
 			console.log(message);
 
@@ -41,14 +29,12 @@ class Login extends Component {
 		  }).then(res =>{
 			var xml = new XMLParser().parseFromString(res.data);
 			var data = xml.getElementsByTagName('return');
-			this.setState({
-				valid: data[0].value
-				});
 			Cookies.set('user',data[0].value, {expires : 1 });
-			console.log(data[0].value);
 		  }).catch(err=>{ console.log(err)});
 	
-	window.location.reload();
+	setTimeout(function () {
+       	    window.location.reload();
+    	},2000);	
 	
 
 	
@@ -56,9 +42,9 @@ class Login extends Component {
 	
 
 	componentDidMount(){	
-		if(Cookies.get('user') == "true"){
+		if(Cookies.get('user') === "true"){
 			this.props.history.push("/");
-		} else if (Cookies.get('user') == 'false') {
+		} else if (Cookies.get('user') === 'false') {
 		alert("Email or password is not valid");
 		}
 }
@@ -82,7 +68,7 @@ class Login extends Component {
 					  </Form.Group>
 					  <br/>
 					  <div style={{textAlign:"center"}}>
-						  <Button disabled={this.state.email== "" || this.state.password== ""} style={{padding:"1% 10%",fontSize:"1.2vw",backgroundColor:"#30475e",border:"none"}} className="login" type="submit" value="Submit">
+						  <Button disabled={this.state.email=== "" || this.state.password=== ""} style={{padding:"1% 10%",fontSize:"1.2vw",backgroundColor:"#30475e",border:"none"}} className="login" type="submit" value="Submit">
 						    Login
 						  </Button>
 					  </div>

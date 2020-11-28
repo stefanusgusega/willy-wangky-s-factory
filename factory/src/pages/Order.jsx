@@ -3,6 +3,7 @@ import NavigationBar from '../components/NavigationBar';
 import {soapMessage} from '../components/Message.js';
 import {Table,Button} from "react-bootstrap";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import Confirmation from '../components/Confirmation';
 var XMLParser= require('react-xml-parser');
 
@@ -80,6 +81,9 @@ handleShow = () =>{
 	}
 	
     componentDidMount() {
+	if(Cookies.get('user') != "true"){
+		this.props.history.push("/login");
+	}
 	
 	let message = soapMessage("getAddStock",[]);
 			
@@ -119,6 +123,7 @@ handleShow = () =>{
 				    <tr>
 				      <th>Id</th>
 				      <th>Id Cokelat</th>
+				      <th>Nama Cokelat</th>
 				      <th>Jumlah</th>
 				      <th>Status</th>
 				    </tr>
@@ -133,7 +138,8 @@ handleShow = () =>{
 				  	{bahan[1].value} 
 				  	</td>
 				  	<td> {bahan[2].value}</td>
-					<td> <Button disabled={bahan[3].value == "delivered"} onClick={() => this.changeStatusRequest(bahan[0].value)}> {bahan[3].value} </Button></td>
+					<td> {bahan[3].value}</td>
+					<td> <Button disabled={bahan[4].value != "pending"} onClick={() => this.changeStatusRequest(bahan[0].value)}> {bahan[4].value} </Button></td>
 				  	</tr>
 				  	
 				  	))}

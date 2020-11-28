@@ -26,8 +26,11 @@ class Ingredients extends Component{
 			  headers : 
 			  { 'Content-type':'text/xml'}
 		  }).then(res =>{
+			console.log(res.data);
 			var xml = new XMLParser().parseFromString(res.data);
+			console.log(xml);
 			var data = xml.getElementsByTagName('return');
+			console.log(data);
 			var bahan = [];
 			data[0].children.forEach(function(obj) {
 				bahan.push(obj.children);

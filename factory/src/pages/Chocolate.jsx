@@ -46,7 +46,7 @@ class Chocolate extends Component {
                     <Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
                         <thead>
                             <tr>
-                                <th style={{textAlign: "center",fontWeight: "bold"}}>No</th>
+                                <th style={{textAlign: "center"}}>No</th>
                                 <th>Nama Cokelat</th>
                                 <th>Jumlah Cokelat</th>
                             </tr>

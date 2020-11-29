@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import '../css/pages.css';
 import {soapMessage} from '../components/Message.js';
-import {Table,Card,CardDeck, Col} from "react-bootstrap";
+import {Table,Card,CardDeck, CardColumns} from "react-bootstrap";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -54,11 +54,11 @@ class Recipe extends Component {
 		</div>
             <div style={{padding:"5% 10%"}}>
 			
-				
+			<CardColumns>
                     {this.state.resep.map((resep,i)=> (
 			<div key={i}>
-			<CardDeck>
-                        <Card style={{ minWidth: '18 rem'}}>
+			
+                        <Card style={{ minWidth: '18rem', maxWidth: '18rem', marginBlockEnd:'2rem'}}>
                             <Card.Body>
                              <Card.Title>ID Cokelat : {resep[0].value}</Card.Title>
                                 <Card.Text>
@@ -66,7 +66,6 @@ class Recipe extends Component {
 					<Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
 							<thead>
 							<tr>
-							<th> ID Bahan </th> 
 							<th>Bahan</th>
 							<th>Jumlah</th>
 							</tr>
@@ -74,7 +73,6 @@ class Recipe extends Component {
 							<tbody>	
 							{resep.slice(1).map((bahan,j) => (
 							<tr key={j}>
-								<td> {bahan.children[0].value}</td>
 								<td> {bahan.children[1].value}</td>
 								<td> {bahan.children[2].value}</td>
 							
@@ -85,9 +83,9 @@ class Recipe extends Component {
 				
 					
                             </Card.Body>
-                        </Card></CardDeck><br/><br/></div>
+                        </Card><br/><br/></div>
                     ))}
-                
+                </CardColumns>
 			
 			</div>
             		

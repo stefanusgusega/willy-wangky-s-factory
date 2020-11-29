@@ -118,8 +118,8 @@ handleShow = () =>{
 		
 		</div>
             <div style={{padding:"5% 10%"}}>
-	            <Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
-				  <thead>
+	            <Table striped bordered hover responsive style={{backgroundColor:"white",color:"black"}}>
+				  <thead style={{backgroundColor:"#f2a07b"}}>
 				    <tr>
 				      <th>Id</th>
 				      <th>Id Cokelat</th>

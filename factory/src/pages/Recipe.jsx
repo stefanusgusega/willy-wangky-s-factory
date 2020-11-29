@@ -55,40 +55,33 @@ class Recipe extends Component {
             <div style={{padding:"5% 10%"}}>
 			
 			<CardColumns>
-                    {this.state.resep.map((resep,i)=> (
-			<div key={i}>
-			
-                        <Card style={{ minWidth: '18rem', maxWidth: '18rem', marginBlockEnd:'2rem'}}>
+			{this.state.resep.map((resep,i)=> (
+				<div key={i}>
+                        <Card bg={'light'} style={{ minWidth: '18rem', maxWidth: '18rem', marginBlockEnd:'2rem'}}>
                             <Card.Body>
                              <Card.Title>ID Cokelat : {resep[0].value}</Card.Title>
                                 <Card.Text>
-					
-					<Table striped bordered hover responsive style={{backgroundColor:"#7e8a97",color:"white"}}>
-							<thead>
-							<tr>
-							<th>Bahan</th>
-							<th>Jumlah</th>
-							</tr>
-							</thead>
-							<tbody>	
-							{resep.slice(1).map((bahan,j) => (
-							<tr key={j}>
-								<td> {bahan.children[1].value}</td>
-								<td> {bahan.children[2].value}</td>
-							
-							</tr> ))}
-							</tbody>
-					</Table>	
+									<Table striped bordered hover responsive style={{backgroundColor:"#ffffff",color:"black"}}>
+										<thead style={{backgroundColor:"#f2a07b",color:"black"}}>
+											<tr>
+												<th>Bahan</th>
+												<th>Jumlah</th>
+											</tr>
+										</thead>
+										<tbody>	
+											{resep.slice(1).map((bahan,j) => (
+											<tr key={j}>
+												<td> {bahan.children[1].value}</td>
+												<td> {bahan.children[2].value}</td>											
+											</tr> ))}
+										</tbody>
+									</Table>	
                                 </Card.Text>
-				
-					
                             </Card.Body>
                         </Card><br/><br/></div>
                     ))}
                 </CardColumns>
-			
 			</div>
-            		
          </div>
       );
 	}
